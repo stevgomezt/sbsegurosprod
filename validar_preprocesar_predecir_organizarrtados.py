@@ -131,11 +131,6 @@ class Modelos_2():
         return s
 
     def extraer_ano(self, df):
-        # n = lambda x: self.Ano(x)
-        # s1 = df['FECHACONSTITUCION'].apply(n)
-        # df['AñoConstitucion'] = s1
-        # df['EDAD'] = datetime.now().year -  df['AñoConstitucion']
-        # df.drop(['AñoConstitucion'], axis=1, inplace = True)
         print("flag fecha")
         df['FECHACONSTITUCION'] = pd.to_datetime(
             df['FECHACONSTITUCION'], errors='coerce')  # , format='%d/%m/%Y'
@@ -483,14 +478,6 @@ class Modelos_2():
         ind = s1[~s1['ILUMINACION'].isnull()].index
         df_c.loc[ind, 'R.ILUMINACION'] = s1.loc[ind, 'ILUMINACION']
 
-        # s1 = pd.DataFrame(df_c['PV'].apply(n))
-        # ind = s1[~s1['PV'].isnull()].index
-        # df_c.loc[ind, 'R.PV'] = s1.loc[ind, 'PV']
-
-        # s1 = pd.DataFrame(df_c['DDV'].apply(n))
-        # ind = s1[~s1['DDV'].isnull()].index
-        # df_c.loc[ind, 'R.DDV'] = s1.loc[ind, 'DDV']
-
         return df_c
 
 # ------------------------------------------------------ PREDICCION  ------------------------------------------------------
@@ -586,38 +573,6 @@ class Modelos_2():
         return probas_rangos, pd.concat([df_i, df_re], axis=1)  # df_i
 
 # ------------------------------------------------------ VALIDACIONES  ------------------------------------------------------
-    # def validar_dtypes(self,dft=None):
-    #   dic_t = {'NIT9': 'int64',  'CONSPROM': 'float',   'RAZONSOCIAL': 'O',
-    #   'CATEGORIADOCUMENTO': 'O',  'CONSUMOENERGIA': 'float',    'RANGOCONSUMO': 'O',
-    #   'VENTASHISTORICAS': 'float','OPORTUNIDADESVENDIDAS': 'float', 'RANGODECOMPRA($)': 'O',
-    #   'RANGORECURRENCIACOMPRA': 'O', 'CLUSTERCOMPRADOS': 'O', 'OPORTUNIDADESCOTIZADAS(#)': 'float',
-    #   'OPORTUNIDADESCOTIZADAS($)': 'float','TOTALOPORTUNIDADESCOTIZADAS+VENDIDAS(#)': 'float',
-    #   'TOTALOPORTUNIDADESCOTIZADAS+VENDIDAS($)': 'float', '%OPORTUNIDADESVENDIDAS(#)': 'O',
-    #   '%OPORTUNIDADESVENDIDAS($)': 'O','TIPOCLIENTE#OPORTUNIDADES': 'O','TIPOCLIENTE$OPORTUNIDADES': 'O','ACTIVIDADPRINCIPAL(EMIS)': 'O',
-    #   'CATEGORIZACIONSECTORES': 'O','CATEGORIZACIONSECTORESCRECIMIENTOPIB': 'O','SECTORECONOMICOCIIU': 'O','TOTALINGRESOOPERATIVO': 'float',
-    #   'TAMANOEMPRESA': 'O', 'PROMEDIOVENTAPORTAMANOEMPRESA': 'float', 'CIUDAD': 'O','DEPARTAMENTO': 'O', 'CATEGORIADEPARTAMENTO': 'O',
-    #   'DIRECCION': 'O', 'TELEFONO': 'O','EMAIL': 'O', 'NUMERODEEMPLEADOS': 'int', 'ESTATUSOPERACIONAL': 'O',
-    #   'GANANCIASDESPUESDEIMPUESTOS': 'float', 'ACTIVOSTOTALES': 'float', 'TOTALDEPATRIMONIO': 'float',  'CAPEX': 'float',
-    #   'SEGMENTACIONEMPRESAESC1': 'O', 'FORMALEGAL': 'O','ACTIVIDADES':'O','FECHACONSTITUCION':'datetime64[ns]'}
-
-    #   if dft ==None:
-    #     df_sin_nulls,dft = self.transform_load()
-
-    #   campos = []
-    #   valido = []
-    #   dtype_correcto = []
-
-    #   for i in dft.columns:
-    #     campos.append(i)
-    #     if dft[i].dtype == dic_t[i]:
-    #       valido.append(True)
-    #       dtype_correcto.append(dic_t[i])
-    #     else:
-    #       valido.append(True)
-    #       dtype_correcto.append(dic_t[i])
-    #   return pd.DataFrame({'CAMPO':campos,
-    #                       'ESTATUS':valido,
-    #                       'DTYPE_CORRECTO':dtype_correcto})
 
     def ValidarCamposCartera(self):
         df_sin_nulls, df_f = self.transform_load()
@@ -652,11 +607,6 @@ class Modelos_2():
 
     def ValidarCamposModelo(self):
         df_sin_nulls, df_f = self.transform_load()
-
-        # dic = {'RANGOCONSUMO'     : 'O', 'RANGODECOMPRA($)': 'O', 'RANGORECURRENCIACOMPRA': 'O',
-        #         'CLUSTERCOMPRADOS': 'O','TIPOCLIENTE#OPORTUNIDADES': 'O', 'TIPOCLIENTE$OPORTUNIDADES': 'O',
-        #         'CATEGORIZACIONSECTORES': 'O', 'ESTATUSOPERACIONAL': 'O', 'TAMANOEMPRESA': 'O',
-        #         'CATEGORIADEPARTAMENTO': 'O'}
 
         dic = {'NUMERODEEMPLEADOS': 'int',
                'GANANCIASDESPUESDEIMPUESTOS': 'float',
@@ -1135,12 +1085,9 @@ class Modelos_2():
             values = df_group['Cantidad']*100
 
             if paleta == 1:
-                colors = ['#e7c6d8', '#cf8db1',
-                          '#9AB5D9', '#9e1c64', '#CEDEF2']
-                # colors = ['#461e7d','#a20f76','#d10872','#741679', '#ff006e']
+                colors = ['#162055', '#0076BA', '#79B4D9', '#DDF2FD', '#0378A6']
             elif paleta == 2:
-                colors = ['#461e7d', '#398ebb',
-                          '#33c6da', '#40569c', '#2cfef9']
+                colors = ['#162055', '#0076BA', '#79B4D9', '#DDF2FD', '#0378A6']
 
             colors = colors[:len(df_group)]
 

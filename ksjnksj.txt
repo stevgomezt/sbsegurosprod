@@ -1,7 +1,7 @@
 1.	Crear imagen de docker
 2.	Crear archivo Dockerfile
 3.	Tener instalado y abierto docker
-4.	Crar imagen de docker : desde consola ejecutar : docker build -t sbsegurosprod:sbspro1 .
+4.	Crar imagen de docker : desde consola ejecutar : docker build -t sbsegurosprod:sbspro3 .
 5.	Instalar GoogleCloudSDKInstaller
 6.	Probar imagen de docker http://localhost:8082/
 7.	Comando gcloud init, autentificarse en google cloud
@@ -15,8 +15,8 @@
     Entrar al repo y copiar directorio (sinmbolo de copiar parte superior rutas carpetas)
     docker tag <ID de la imagen> <directorio del repo en art’reg’>/<nombreimagen>  :<tag>
 
-    docker tag c759478f4145 us-central1-docker.pkg.dev/sbsegurosprod/sbsegurosprod:sbspro2
-    docker push us-central1-docker.pkg.dev/sbsegurosprod/sbsegurosprod/sbs:sbspro2
+    docker tag ec8160a549fc us-central1-docker.pkg.dev/sbsegurosprod/sbsegurosprod/sbs/sbsegurosprod:sbspro3
+    docker push us-central1-docker.pkg.dev/sbsegurosprod/sbsegurosprod/sbs/sbsegurosprod:sbspro3
 
     el nombre de la imagen debe ser distinto al nombre del repositorio
 
@@ -31,5 +31,5 @@
     
     Id de imagen lo da docker, 
     artifact Register/
-    
+
     

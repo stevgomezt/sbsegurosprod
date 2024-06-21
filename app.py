@@ -28,7 +28,6 @@ import pickle  # Para serializar y deserializar objetos en Python
 import uuid  # Para generar identificadores únicos
 import re  # Para trabajar con expresiones regulares
 
-
 # Para Botones sin recargar
 
 # -----------------------------------------------------IAP GCP
@@ -36,10 +35,6 @@ import re  # Para trabajar con expresiones regulares
 app = Flask(__name__)
 
 # -----------------------------------------------------
-
-# Configure this environment variable via app.yaml
-# CLOUD_STORAGE_BUCKET = os.environ['CLOUD_STORAGE_BUCKET']
-
 
 @app.route('/')
 def index() -> str:
@@ -204,10 +199,10 @@ def download_button(object_to_download, download_filename, button_text, pickle_i
                 line-height: 1.6;
                 user-select: none;
                 background-color: white;
-                color: #9e1c64;
+                color: #0091ff;
                 height: 35px;
                 width: auto;
-                border: solid 1px #9e1c64;
+                border: solid 1px #0091ff;
                 font-size: 15px;
                 border-radius: 0px;
                 font-family: "Roboto", sans-serif;
@@ -224,26 +219,26 @@ def download_button(object_to_download, download_filename, button_text, pickle_i
             }}
             
             #{button_id}:focus:not(:active) {{
-                border-color: #9e1c64;
+                border-color: #0091ff;
                 background-color: white;
-                color: #9e1c64;
+                color: #0091ff;
                 text-decoration: none !important;
             }}
             
             #{button_id}:hover {{
-                border-color: #9e1c64;
-                background-color: white;
-                color: #9e1c64;
+                border-color: #0091ff;
+                background-color: #0091ff;
+                color: white;
                 text-decoration: none !important;
             }}
             
             #{button_id}:active {{
-                border-color: #9e1c64;
+                border-color: #0091ff;
                 -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
                 -moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
                 box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
                 background-color: white;
-                color: #9e1c64;
+                color: #0091ff;
                 text-decoration: none !important;
             }}
         </style> """
@@ -365,20 +360,20 @@ def generar_graficos(df_t, configuraciones, mayus=True, color=1, auto_orden=Fals
         # st.write(df_group)
         if color == 0:
             color_b = "#757575"
-        if color == 1:       # Morado oscuro
-            color_b = '#e7c6d8'
-        elif color == 2:      # Naranja
-            color_b = '#9e1c64'
-        elif color == 3:     # Azul cielo
-            color_b = '#6e6d6e'
-        elif color == 4:    # Verde Claro
-            color_b = '#5c788f'
-        elif color == 5:  # Amarillo Claro
-            color_b = '#fef367'
-        elif color == 6:     # Fuccia
-            color_b = '#cf8db1'
-        elif color == 7:     # Morado Claro
-            color_b = '#66003d'
+        if color == 1:
+            color_b = '#0076BA'
+        elif color == 2:
+            color_b = '#162055'
+        elif color == 3:
+            color_b = '#0378A6'
+        elif color == 4:
+            color_b = '#DDF2FD'
+        elif color == 5:
+            color_b = '#79B4D9'
+        elif color == 6:
+            color_b = '#0076BA'
+        elif color == 7:
+            color_b = '#162055'
 
         if mayus == True:
             if total == False:
@@ -395,20 +390,9 @@ def generar_graficos(df_t, configuraciones, mayus=True, color=1, auto_orden=Fals
                         df_group[config['y_axis']]), axis=alt.Axis(ticks=False, title='')),
                     tooltip=[config['y_axis']+":N",
                              'Cantidad_n:Q', 'Porcentaje:O'
-                             # alt.Tooltip(config['y_axis']+":N"),
-                             # alt.Tooltip('Cantidad:Q', format=''),  # Add k letter before number
-                             # alt.Tooltip('Porcentaje:O', format='%')
                              ],
                     text=alt.Text('Porcentaje:N')
                 ).configure_mark(color=color_b).configure_view(fill="none").configure_axis(grid=False).configure_axisY(labelFont='Roboto').configure_axisX(ticks=True, labels=True)
-
-                # .configure_axisY(
-                # labelFont = 'Roboto',  # Cambia la fuente de las etiquetas
-                # labelFontSize=1,   # Cambia el tamaño de las etiquetas
-                # labelColor='#8568a8'    # Cambia el color de las etiquetas
-                # )#.properties(width=100,  # Especifica el ancho del gráfico en píxeles
-                #           height=200)  # Especifica la altura del gráfico en píxeles
-                # .configure_axisX(ticks=True, labels=True)
 
                 config['col'].altair_chart(
                     bar, use_container_width=True, theme="streamlit")
@@ -424,11 +408,6 @@ def generar_graficos(df_t, configuraciones, mayus=True, color=1, auto_orden=Fals
                              'Cantidad:Q', 'Porcentaje:O'],
                     text=alt.Text('Porcentaje:N')
                 ).configure_mark(color=color_b).configure_view(fill="none").configure_axis(grid=False).configure_axisX(ticks=False, labels=False).configure_axisY(labelFont='Roboto')
-                # .configure_axisY(
-                #     labelFont='Roboto',  # Cambia la fuente de las etiquetas
-                #     labelFontSize=22,   # Cambia el tamaño de las etiquetas
-                #     labelColor='#8568a8'    # Cambia el color de las etiquetas
-                # )
 
                 config['col'].altair_chart(
                     bar, use_container_width=True, theme="streamlit")
@@ -444,11 +423,6 @@ def generar_graficos(df_t, configuraciones, mayus=True, color=1, auto_orden=Fals
                 tooltip=[config['y_axis']+":N", 'Cantidad:Q', 'Porcentaje:O'],
                 text=alt.Text('Porcentaje:N')
             ).configure_mark(color=color_b).configure_view(fill="none").configure_axis(grid=False).configure_axisY(labelFont='Roboto')
-            # .configure_axisY(
-            # labelFont='Playfair Display',  # Cambia la fuente de las etiquetas
-            # labelFontSize=18,   # Cambia el tamaño de las etiquetas
-            # labelColor='#8568a8'    # Cambia el color de las etiquetas
-            # )
 
             config['col'].altair_chart(
                 bar, use_container_width=True, theme="streamlit")
@@ -468,7 +442,7 @@ def dona_plotly(df_prob_prod, producto='INSTALACIONES', col=None, titulo=None, t
     etiquetas = ['Alta', 'Media', 'Baja']
 
     # Colores personalizados
-    colores = ['#e7c6d8', '#9e1c64', '#f4f4f4']
+    colores = ['#0076BA', '#162055', '#79B4D9']
 
     total = sum(valores)
     conteos = [str(valor) for valor in valores]
@@ -490,19 +464,11 @@ def dona_plotly(df_prob_prod, producto='INSTALACIONES', col=None, titulo=None, t
             'text': titulo,
             'y': 0.95,
             'yanchor': 'top',
-            'font': {'size': 15, 'family': "Roboto, sans-serif", 'color': '#9e1c64'}
+            'font': {'size': 15, 'family': "Roboto, sans-serif", 'color': '#002f6c'}
         }
         )
 
     fig.update_layout(width=tamano_pantalla[0], height=tamano_pantalla[1])
-    # fig.update_layout(  legend=dict(
-    #                     orientation='v',  # Orientación horizontal
-    #                     yanchor='bottom', # Ancla en la parte inferior
-    #                     y=1.3,  # Desplazamiento vertical
-    #                     xanchor='right',  # Ancla en el extremo derecho
-    #                     x=0.9 # Desplazamiento horizontal
-    #                     ,font=dict(size=12)  # Tamaño de la fuente
-    #                     ))
 
     # Ocultar el legend
     fig.update_layout(
@@ -538,8 +504,8 @@ def espacio(col, n):
 
 def scatter_plot(df, col=None):
     # Definir los colores base
-    color_azul = 'rgb(70, 30, 125)'
-    color_amarillo = 'rgb(254, 243, 103)'
+    color_azul = '#162055'
+    color_amarillo = '#0076BA'
 
     # Crear la paleta de color
     colores = [color_azul, color_amarillo]
@@ -582,7 +548,7 @@ def scatter_plot(df, col=None):
 def main():
 
     # Configura titulo e icon de pagina
-    st.set_page_config(page_title="SBSSEGUROS Colombia S.A. Compañia de seguros",
+    st.set_page_config(page_title="Existimos porque creemos que tus sueños deben ser una realidad",
                        page_icon="img/Icono.png", layout="wide")
 
     # Leer el contenido del archivo CSS
@@ -611,20 +577,7 @@ def main():
 
     # Imagen centrada en la barra lateral con tamaño de 150px
     st.sidebar.image("img/logo.png", width=180, output_format="PNG",
-                     caption='SBSSEGUROS Colombia S.A. Compañia de seguros')
-
-    # container01.markdown(f'<div style="width: 300px;height: 60px;aspect-ratio: 16 / 8.1;border-radius: 12px;background-color: #ffffff;background-repeat: no-repeat;background-size: cover;background-position: center center;box-shadow: rgba(86, 90, 97, 0.12) 0px 4px 12px;margin-bottom: 21px; text-align: center;display: flex;justify-content: center;"><h6>CHUBB</h6></div>', unsafe_allow_html=True)
-
-    # Estilo botón
-    # st.markdown("""
-    #         <style>
-    #         div.stButton > button:hover {
-    #             background-color:#f0f2f6;
-    #             color:#461e7d
-    #         }
-    #         </style>""", unsafe_allow_html=True)
-
-    # a, b, c = False, False, False
+                     caption='Existimos porque creemos que tus sueños deben ser una realidad')
 
     st.markdown(
         """
@@ -633,14 +586,17 @@ def main():
         </head>
 
         <div style="display: flex; justify-content: center;">
-            <a href="https://co.linkedin.com/company/sbs-seguros-colombia-s-a" style="color: #1877F2; margin: 0 30px;">
+            <a href="https://co.linkedin.com/company/mundial-seguros-s-a-" style="color: #0057b8; margin: 0 30px;">
                 <i class="fab fa-linkedin" style="font-size: 30px;"></i>
             </a>
-            <a href="https://www.instagram.com/sbsseguroscolombia/?hl=es" style="color: #E4405F; margin: 0 30px;">
+            <a href="https://www.instagram.com/segurosmundial/?hl=es" style="color: #0057b8; margin: 0 30px;">
                 <i class="fab fa-instagram" style="font-size: 30px;"></i>
             </a>
-            <a href="https://www.youtube.com/c/SBSSEGUROS" style="color: #FF0000; margin: 0 30px;">
-                <i class="fab fa-youtube-square" style="font-size: 30px;"></i>
+            <a href="https://www.facebook.com/segurosmundial/?locale=es_LA" style="color: #0057b8; margin: 0 30px;">
+                <i class="fab fa-facebook" style="font-size: 30px;"></i>
+            </a>
+            <a href="https://twitter.com/SegurosMundial" style="color: #0057b8; margin: 0 30px;">
+                <i class="fab fa-twitter" style="font-size: 30px;"></i>
             </a>
         </div>
     """,
@@ -892,7 +848,7 @@ def main():
                         # Orden deseado de las categorías
                         'order': ['INSTALACIONES', 'MANTENIMIENTO', 'ESTUDIOS', 'AUMENTOS_CARGA', 'FIBRA_OPTICA', 'REDESELECTRICAS', 'ILUMINACION', 'CUENTASNUEVAS'],
                         # Orden deseado de las categorías']ACIONES','MANTENIMIENTO','ESTUDIOS','AUMENTOS_CARGA','FIBRA_OPTICA','REDESELECTRICAS','ILUMINACION','CUENTASNUEVAS0
-                        'order_f': ['Asegura tus compras', 'AP', 'Cancer', 'Seguros por kilometro', 'Bicicletas', 'Hogar Express', 'Billetera y documentos', 'Viajes']
+                        'order_f': ['Disfruta Tranquilo', 'Vida', 'Desempleo', 'Responsabilidad Civil Familiar', 'AP Segurísimo', 'Cyber Esencial', 'SOAT', 'Arriendos']
                     }]
 
                 # espacio(0,0,1,9)
@@ -908,51 +864,51 @@ def main():
                                 'Valor_probabilidad5',	'Producto_6',	'Probabilidad_6',	'Valor_probabilidad6',	'Producto_7',
                                 'Probabilidad_7',	'Valor_probabilidad7',	'Producto_8',	'Probabilidad_8',	'Valor_probabilidad8']]
 
-                dic1 = ['INSTALACIONES', 'MANTENIMIENTO', 'ESTUDIOS', 'AUMENTOS_CARGA',
-                        'FIBRA_OPTICA', 'REDESELECTRICAS', 'ILUMINACION', 'CUENTASNUEVAS']
-                dic2 = ['Asegura tus compras', 'AP', 'Cancer',
-                        'Seguro por kilometro', 'Bicicletas', 'Hogar Express', 'Billetera y documentos', 'Viajes']
+                dic1 = ['INSTALACIONES', 'MANTENIMIENTO', 'ESTUDIOS', 'AUMENTOS_CARGA', 'FIBRA_OPTICA', 'REDESELECTRICAS', 'ILUMINACION', 'CUENTASNUEVAS']
+                dic2 = ['Disfruta Tranquilo', 'Vida', 'Desempleo', 'Responsabilidad Civil Familiar', 'AP Segurísimo', 'Cyber Esencial', 'SOAT', 'Arriendos']
                 Xf = Xf.replace(dict(zip(dic1, dic2)))
                 download_excel(Xf, 'Resultado', col=col2_container1)
 
                 # INSTALACIONES
                 dona_plotly(df_prob_prod=df_prob_prod, producto='INSTALACIONES',
-                            titulo='Asegura tus compras', col=col1_container2)
-
-                # ######## Mantenimiento
-                # dona('MANTENIMIENTO',0 , 1, 'Mantenimiento')
-                dona_plotly(df_prob_prod=df_prob_prod, producto='MANTENIMIENTO',
-                            titulo='Cancer', col=col2_container2)
+                            titulo='Disfruta Tranquilo', col=col1_container2)
 
                 # ######## Estudios
                 # dona('ESTUDIOS',0 , 2, 'c')
                 dona_plotly(df_prob_prod=df_prob_prod, producto='ESTUDIOS',
-                            titulo='AP', col=col1_container2)
-
-                # #AUMENTOS_CARGA
-                # dona('AUMENTOS_CARGA',0 , 3, 'Aumentos de carga')
-                dona_plotly(df_prob_prod=df_prob_prod, producto='AUMENTOS_CARGA',
-                            titulo='Bicicletas', col=col2_container2)
+                            titulo='Vida', col=col1_container2)
+                
+                # ######## Mantenimiento
+                # dona('MANTENIMIENTO',0 , 1, 'Mantenimiento')
+                dona_plotly(df_prob_prod=df_prob_prod, producto='MANTENIMIENTO',
+                            titulo='Desempleo', col=col2_container2)
 
                 # #FIBRA OPTICA
                 # dona('FIBRA_OPTICA',1 , 0, 'Fibras ópticas')
                 dona_plotly(df_prob_prod=df_prob_prod, producto='FIBRA_OPTICA',
-                            titulo='Seguros por kilometro', col=col1_container2)
+                            titulo='Responsabilidad Civil Familiar', col=col1_container2)
 
-                # #REDESELECTRICAS
-                # dona('REDESELECTRICAS',1 , 1, 'Redes eléctricas')
-                dona_plotly(df_prob_prod=df_prob_prod, producto='REDESELECTRICAS',
-                            titulo='Viajes', col=col2_container2)
-
-                # #ILUMINACION
-                # dona('ILUMINACION',1 , 2, 'Iluminación')
-                dona_plotly(df_prob_prod=df_prob_prod, producto='ILUMINACION',
-                            titulo='Billetera y documentos', col=col1_container2)
+                # #AUMENTOS_CARGA
+                # dona('AUMENTOS_CARGA',0 , 3, 'Aumentos de carga')
+                dona_plotly(df_prob_prod=df_prob_prod, producto='AUMENTOS_CARGA',
+                            titulo='AP Segurísimo', col=col2_container2)
 
                 # #CUENTASNUEVAS
                 # dona('CUENTASNUEVAS',1 , 3, 'Cuentas nuevas')
                 dona_plotly(df_prob_prod=df_prob_prod, producto='CUENTASNUEVAS',
-                            titulo='Hogar Express', col=col2_container2)
+                            titulo='Cyber Esencial', col=col2_container2)
+
+                # #ILUMINACION
+                # dona('ILUMINACION',1 , 2, 'Iluminación')
+                dona_plotly(df_prob_prod=df_prob_prod, producto='ILUMINACION',
+                            titulo='SOAT', col=col1_container2)
+                
+                # #REDESELECTRICAS
+                # dona('REDESELECTRICAS',1 , 1, 'Redes eléctricas')
+                dona_plotly(df_prob_prod=df_prob_prod, producto='REDESELECTRICAS',
+                            titulo='Arriendos', col=col2_container2)
+
+
 
             except UnboundLocalError:
                 st.warning(
@@ -987,7 +943,7 @@ def main():
                             'col': col2,
                             # Orden deseado de las categorías
                             'order': ['SINCATALOGAR', 'NOCOMPRADOR', 'PEQUENOCOMPRADOR', 'MEDIANOCOMPRADOR', 'GRANCOMPRADOR', 'COMPRADORMEGAPROYECTOS'],
-                            'order_f': ['AP', 'AP', 'Asegura tus compras', 'Cancer', 'Hogar Express', 'Billetera y documentos', 'No comprador']
+                            'order_f': ['Vida', 'Disfruta Tranquilo', 'Desempleo', 'Cyber Esencial', 'SOAT', 'No comprador']
                         }]
                     generar_graficos(df_t, configuraciones, color=1)
 
@@ -1002,7 +958,7 @@ def main():
                             'col': col2,
                             # Orden deseado de las categorías
                             'order': ['SINCATALOGAR', 'NOCOMPRADOR', 'UNICACOMPRA', 'BAJARECURRENCIA', 'RECURRENCIAMEDIA', 'GRANRECURRENCIA'],
-                            'order_f': ['Sin catalogar', 'AP', 'Asegura tus compras', 'Hogar Express', 'Bicicletas', 'Billetera y documentos']
+                            'order_f': ['Sin catalogar', 'Vida', 'Disfruta Tranquilo', 'Cyber Esencial', 'AP Segurísimo', 'SOAT']
                             # 'order_f':['Sin catalogar', 'No comprador','Unica compra','Baja recurrencia','Recurrencia media','Gran recurrencia']
                         }]
                     generar_graficos(df_t, configuraciones, color=2)
@@ -1015,8 +971,7 @@ def main():
                             'x_axis_title': 'Cantidad de clientes',
                             'y_axis': 'Tipo de cliente por numero de oportunidades',
                             'col': col2,
-                            'order': ['SINCATALOGAR', 'NICOMPRA-NICOTIZA', 'SOLOCOTIZAN', 'COTIZANMASDELOQUECOMPRAN',
-                                      'COMPRANYCOTIZAN', 'COMPRANMASDELOQUECOTIZAN', 'SIEMPRECOMPRAN'],  # Orden deseado de las categorías
+                            'order': ['SINCATALOGAR', 'NICOMPRA-NICOTIZA', 'SOLOCOTIZAN', 'COTIZANMASDELOQUECOMPRAN','COMPRANYCOTIZAN', 'COMPRANMASDELOQUECOTIZAN', 'SIEMPRECOMPRAN'],  # Orden deseado de las categorías
                             'order_f': ['Sin catalogar', 'Entre 31 y 60 días', 'Entre 61 y 90 días', 'Entre 91 y 120 días',
                                         'Entre 121 y 150 días', 'Entre a 151 y 180 días', 'Mayores a 180 días'],
                         }]
